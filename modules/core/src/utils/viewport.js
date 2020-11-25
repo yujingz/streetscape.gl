@@ -41,10 +41,11 @@ export function getViewStateOffset(oldViewState, viewState, oldOffset) {
 }
 
 // Adjust lng/lat to position the car 1/4 from screen bottom
-function offsetViewState(viewState, offset) {
+function offsetViewState(viewState, offset, viewMode) {
   const shiftedViewState = {
     ...viewState,
-    bearing: viewState.bearing + offset.bearing
+    bearing: viewState.bearing + offset.bearing,
+    ...(viewMode.webViewPortOptions || {})
   };
 
   const helperViewport = new WebMercatorViewport(shiftedViewState);
@@ -135,7 +136,7 @@ export function getViewStates({viewState, trackedPosition, viewMode, offset}) {
       viewState.position = [0, 0, trackedPosition.altitude];
     }
 
-    viewStates[name] = offsetViewState(viewState, offset);
+    viewStates[name] = offsetViewState(viewState, offset, viewMode);
   }
 
   return viewStates;

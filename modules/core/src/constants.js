@@ -42,6 +42,10 @@ export const VIEW_MODE = {
     orthographic: true,
     tracked: {
       position: true
+    },
+    webViewPortOptions: {
+      nearZMultiplier: 0.1,
+      farZMultiplier: 1.01,
     }
   },
   PERSPECTIVE: {
